@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "description": "兵种进阶注册表。进阶是永久战役操作，目标兵种仍然复用 classes.json 的完整属性与技能模板。",
+  "advancements": [
+    {"id":"infantry_guard","fromClass":"infantry","toClass":"guard","name":"重装卫士","requiredLevel":3,"goldCost":120,"itemId":"iron_sword"},
+    {"id":"infantry_heavy","fromClass":"infantry","toClass":"heavy_infantry","name":"重甲步兵","requiredLevel":5,"goldCost":240},
+    {"id":"cavalry_heavy","fromClass":"cavalry","toClass":"heavy_cavalry","name":"重骑兵","requiredLevel":4,"goldCost":180,"itemId":"war_horse"},
+    {"id":"archer_mounted","fromClass":"archer","toClass":"mounted_archer","name":"弩骑射手","requiredLevel":4,"goldCost":180,"itemId":"hunter_bow"},
+    {"id":"mage_elder","fromClass":"mage","toClass":"elder_mage","name":"大贤良师","requiredLevel":5,"goldCost":260,"itemId":"fire_talisman"},
+    {"id":"healer_medic","fromClass":"healer","toClass":"field_medic","name":"军医","requiredLevel":4,"goldCost":160,"itemId":"doctor_staff"}
+  ]
+}

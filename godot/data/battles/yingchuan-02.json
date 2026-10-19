@@ -1,0 +1,322 @@
+{
+  "version": 6,
+  "id": "yingchuan-02",
+  "name": "颍川之战 · 夜袭粮道",
+  "description": "第二章 · 夜袭粮道：在桥梁北侧切断黄巾军补给。",
+  "board": {
+    "width": 12,
+    "height": 10,
+    "coordinateSystem": "x increases right, y increases down",
+    "tiles": [
+      [
+        "road",
+        "plain",
+        "plain",
+        "plain",
+        "plain",
+        "plain",
+        "river",
+        "plain",
+        "plain",
+        "plain",
+        "plain",
+        "plain"
+      ],
+      [
+        "road",
+        "mountain",
+        "mountain",
+        "mountain",
+        "plain",
+        "plain",
+        "river",
+        "plain",
+        "farmland",
+        "farmland",
+        "plain",
+        "plain"
+      ],
+      [
+        "road",
+        "mountain",
+        "mountain",
+        "mountain",
+        "plain",
+        "plain",
+        "river",
+        "plain",
+        "farmland",
+        "farmland",
+        "plain",
+        "plain"
+      ],
+      [
+        "road",
+        "plain",
+        "plain",
+        "plain",
+        "plain",
+        "plain",
+        "river",
+        "plain",
+        "plain",
+        "forest",
+        "forest",
+        "forest"
+      ],
+      [
+        "road",
+        "plain",
+        "plain",
+        "village",
+        "wall",
+        "plain",
+        "river",
+        "village",
+        "plain",
+        "forest",
+        "forest",
+        "forest"
+      ],
+      [
+        "road",
+        "road",
+        "road",
+        "road",
+        "road",
+        "road",
+        "bridge",
+        "road",
+        "road",
+        "road",
+        "road",
+        "road"
+      ],
+      [
+        "plain",
+        "plain",
+        "plain",
+        "village",
+        "wall",
+        "plain",
+        "river",
+        "village",
+        "plain",
+        "plain",
+        "plain",
+        "plain"
+      ],
+      [
+        "plain",
+        "farmland",
+        "farmland",
+        "plain",
+        "plain",
+        "plain",
+        "river",
+        "plain",
+        "plain",
+        "forest",
+        "forest",
+        "forest"
+      ],
+      [
+        "plain",
+        "farmland",
+        "farmland",
+        "plain",
+        "plain",
+        "plain",
+        "river",
+        "plain",
+        "plain",
+        "forest",
+        "forest",
+        "forest"
+      ],
+      [
+        "plain",
+        "plain",
+        "plain",
+        "plain",
+        "plain",
+        "plain",
+        "river",
+        "plain",
+        "plain",
+        "forest",
+        "forest",
+        "forest"
+      ]
+    ]
+  },
+  "units": [
+    {
+      "instanceId": "wei_infantry_01",
+      "characterId": "infantry-a",
+      "displayName": "魏步兵1",
+      "side": "ally",
+      "position": {
+        "x": 1,
+        "y": 8
+      },
+      "level": 1,
+      "exp": 0
+    },
+    {
+      "instanceId": "wei_cavalry_01",
+      "characterId": "cavalry-a",
+      "displayName": "魏骑兵1",
+      "side": "ally",
+      "position": {
+        "x": 2,
+        "y": 8
+      },
+      "level": 2,
+      "exp": 20
+    },
+    {
+      "instanceId": "wei_archer_01",
+      "characterId": "archer-a",
+      "displayName": "魏弓箭手1",
+      "side": "ally",
+      "position": {
+        "x": 1,
+        "y": 9
+      },
+      "level": 3,
+      "exp": 40
+    },
+    {
+      "instanceId": "wei_mage_01",
+      "characterId": "mage-a",
+      "displayName": "魏法师1",
+      "side": "ally",
+      "position": {
+        "x": 2,
+        "y": 9
+      },
+      "level": 4,
+      "exp": 60
+    },
+    {
+      "instanceId": "wei_healer_01",
+      "characterId": "healer-a",
+      "displayName": "魏医生1",
+      "side": "ally",
+      "position": {
+        "x": 3,
+        "y": 8
+      },
+      "level": 5,
+      "exp": 80
+    },
+    {
+      "instanceId": "yellow_turban_infantry_01",
+      "characterId": "infantry-a",
+      "displayName": "黄巾步兵1",
+      "side": "enemy",
+      "position": {
+        "x": 9,
+        "y": 0
+      },
+      "level": 6,
+      "exp": 80
+    },
+    {
+      "instanceId": "yellow_turban_cavalry_01",
+      "characterId": "cavalry-a",
+      "displayName": "黄巾骑兵1",
+      "side": "enemy",
+      "position": {
+        "x": 8,
+        "y": 0
+      },
+      "level": 5,
+      "exp": 60
+    },
+    {
+      "instanceId": "yellow_turban_archer_01",
+      "characterId": "archer-a",
+      "displayName": "黄巾弓箭手1",
+      "side": "enemy",
+      "position": {
+        "x": 9,
+        "y": 1
+      },
+      "level": 4,
+      "exp": 40
+    },
+    {
+      "instanceId": "yellow_turban_mage_01",
+      "characterId": "mage-a",
+      "displayName": "黄巾法师1",
+      "side": "enemy",
+      "position": {
+        "x": 8,
+        "y": 1
+      },
+      "level": 3,
+      "exp": 20
+    },
+    {
+      "instanceId": "yellow_turban_healer_01",
+      "characterId": "healer-a",
+      "displayName": "黄巾医生1",
+      "side": "enemy",
+      "position": {
+        "x": 7,
+        "y": 1
+      },
+      "level": 2,
+      "exp": 0
+    }
+  ],
+  "objectives": {
+    "victory": [
+      {
+        "type": "defeat_all",
+        "side": "enemy"
+      }
+    ],
+    "defeat": [
+      {
+        "type": "all_units_dead",
+        "side": "ally"
+      }
+    ]
+  },
+  "rules": {
+    "turnOrder": "ally_then_enemy",
+    "allowFriendlyFire": false,
+    "fogOfWar": false,
+    "maxTurns": null,
+    "aiPolicy": "ranged",
+    "carryOverHp": false
+  },
+  "events": [
+    {
+      "id": "yingchuan-02-intro",
+      "trigger": "battle_start",
+      "text": "斥候回报：黄巾军正在集结，先稳住主战线。"
+    },
+    {
+      "id": "yingchuan-02-turn-2",
+      "trigger": "turn_start",
+      "turn": 2,
+      "text": "桥头风急，敌军的阵形开始松动。"
+    },
+    {
+      "id": "yingchuan-02-victory",
+      "trigger": "battle_end",
+      "text": "战报传回大营：此战告捷，队伍获得新的战利品。",
+      "result": "victory"
+    }
+  ],
+  "rewards": {
+    "gold": 100,
+    "equipmentIds": [
+      "doctor_staff"
+    ]
+  }
+}

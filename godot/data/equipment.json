@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "description": "装备注册表：品质、价格、复制数量和属性修正均由数据驱动。",
+  "equipment": [
+    {
+      "id": "iron_sword",
+      "name": "精铁环首刀",
+      "slot": "weapon",
+      "allowedClasses": [
+        "infantry"
+      ],
+      "statModifiers": {
+        "attack": 8,
+        "defense": 2
+      },
+      "rarity": "common",
+      "qualityBonusPercent": 0,
+      "price": 80,
+      "maxCopies": 3
+    },
+    {
+      "id": "war_horse",
+      "name": "青骢战马",
+      "slot": "mount",
+      "allowedClasses": [
+        "cavalry"
+      ],
+      "statModifiers": {
+        "move": 1,
+        "evasion": 3
+      },
+      "rarity": "rare",
+      "qualityBonusPercent": 5,
+      "price": 160,
+      "maxCopies": 2
+    },
+    {
+      "id": "hunter_bow",
+      "name": "猎风弓",
+      "slot": "weapon",
+      "allowedClasses": [
+        "archer"
+      ],
+      "statModifiers": {
+        "attack": 6,
+        "hit": 4
+      },
+      "rarity": "common",
+      "qualityBonusPercent": 0,
+      "price": 90,
+      "maxCopies": 3
+    },
+    {
+      "id": "fire_talisman",
+      "name": "五行火符",
+      "slot": "talisman",
+      "allowedClasses": [
+        "mage"
+      ],
+      "statModifiers": {
+        "magicAttack": 8,
+        "maxMp": 10
+      },
+      "rarity": "epic",
+      "qualityBonusPercent": 10,
+      "price": 220,
+      "maxCopies": 1
+    },
+    {
+      "id": "doctor_staff",
+      "name": "青囊杖",
+      "slot": "weapon",
+      "allowedClasses": [
+        "healer"
+      ],
+      "statModifiers": {
+        "magicAttack": 5,
+        "magicDefense": 5
+      },
+      "rarity": "rare",
+      "qualityBonusPercent": 5,
+      "price": 140,
+      "maxCopies": 2
+    }
+  ]
+}

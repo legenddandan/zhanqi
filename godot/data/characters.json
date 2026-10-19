@@ -1,0 +1,134 @@
+{
+  "version": 5,
+  "description": "第一版通用人物/单位模板。人物通过 classId 继承兵种基础属性和成长规则；statModifiers 用于配置个人差异。",
+  "statPolicy": {
+    "reservedFields": [
+      "level",
+      "exp",
+      "maxHp",
+      "maxMp",
+      "attack",
+      "defense",
+      "magicAttack",
+      "magicDefense",
+      "hit",
+      "evasion",
+      "move",
+      "minRange",
+      "maxRange"
+    ],
+    "growthRule": "属性以1级基础值为起点；达到 firstAtLevel 后，每 everyLevels 级增加 amount。",
+    "damageRule": {
+      "physical": "攻击者物理攻击 - 防御者物理防御",
+      "magic": "攻击者魔法攻击 - 防御者魔法防御"
+    },
+    "sourcePolicy": {
+      "classTemplate": "兵种提供公共1级基础属性与逐属性成长",
+      "characterModifier": "人物可通过 statModifiers.base 和 statModifiers.growth 叠加个人差异，未配置时按0处理",
+      "calculation": "当前属性 = 兵种基础 + 兵种成长 + 人物基础修正 + 人物成长修正"
+    }
+  },
+  "characters": [
+    {
+      "id": "infantry-a",
+      "name": "步兵甲",
+      "classId": "infantry",
+      "tags": [
+        "前排",
+        "均衡"
+      ],
+      "statModifiers": {
+        "base": {
+          "attack": 2
+        },
+        "growth": {}
+      },
+      "skillIds": [
+        "personal_infantry_tactics",
+        "personal_infantry_veteran"
+      ]
+    },
+    {
+      "id": "cavalry-a",
+      "name": "骑兵甲",
+      "classId": "cavalry",
+      "tags": [
+        "机动",
+        "突击"
+      ],
+      "statModifiers": {
+        "base": {
+          "evasion": 2
+        },
+        "growth": {}
+      },
+      "skillIds": [
+        "personal_cavalry_breakthrough",
+        "personal_cavalry_rearguard"
+      ]
+    },
+    {
+      "id": "archer-a",
+      "name": "弓箭手甲",
+      "classId": "archer",
+      "tags": [
+        "远程",
+        "物理输出"
+      ],
+      "statModifiers": {
+        "base": {
+          "hit": 2
+        },
+        "growth": {}
+      },
+      "skillIds": [
+        "personal_archer_aim",
+        "personal_archer_eagle_eye"
+      ]
+    },
+    {
+      "id": "mage-a",
+      "name": "法师甲",
+      "classId": "mage",
+      "tags": [
+        "远程",
+        "魔法输出"
+      ],
+      "statModifiers": {
+        "base": {
+          "magicAttack": 3
+        },
+        "growth": {
+          "magicAttack": {
+            "amount": 1,
+            "everyLevels": 2,
+            "firstAtLevel": 2
+          }
+        }
+      },
+      "skillIds": [
+        "personal_mage_chain_flame",
+        "personal_mage_focus"
+      ]
+    },
+    {
+      "id": "healer-a",
+      "name": "医生甲",
+      "classId": "healer",
+      "tags": [
+        "治疗",
+        "辅助"
+      ],
+      "statModifiers": {
+        "base": {
+          "magicDefense": 2
+        },
+        "growth": {}
+      },
+      "skillIds": [
+        "personal_healer_group_heal",
+        "personal_healer_cleanse"
+      ]
+    }
+  ]
+}

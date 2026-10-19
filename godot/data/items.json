@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "description": "可消耗道具注册表。装备与消耗品分开管理，战斗消耗由 BattleService 执行。",
+  "items": [
+    {"id":"healing_herb","name":"止血草","category":"consumable","price":30,"battleEffect":{"type":"heal","amount":35}},
+    {"id":"mana_potion","name":"回气散","category":"consumable","price":35,"battleEffect":{"type":"restore_mp","amount":25}},
+    {"id":"antidote","name":"解毒丸","category":"consumable","price":25,"battleEffect":{"type":"cleanse","statusIds":["poison","burn"]}}
+  ]
+}

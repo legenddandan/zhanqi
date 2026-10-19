@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "description": "战斗状态注册表。状态通过 ID、持续回合和 tick/effect 数据驱动。",
+  "statuses": [
+    {"id":"poison","name":"中毒","duration":2,"stackable":false,"tick":{"type":"damage","amount":6,"damageType":"status"}},
+    {"id":"burn","name":"灼烧","duration":2,"stackable":false,"tick":{"type":"damage","amount":8,"damageType":"status"}},
+    {"id":"attack_up","name":"奋战","duration":2,"stackable":false,"statModifiers":{"attack":10}},
+    {"id":"magic_up","name":"聚气","duration":2,"stackable":false,"statModifiers":{"magicAttack":10}},
+    {"id":"slow","name":"迟缓","duration":1,"stackable":false,"statModifiers":{"move":-2}}
+  ]
+}

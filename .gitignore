@@ -1,0 +1,48 @@
+# Godot editor/import cache and generated project state
+godot/.godot/
+**/.godot/
+*.import
+
+# Godot and platform export output
+export/
+exports/
+build/
+builds/
+*.apk
+*.aab
+*.ipa
+*.app
+*.dmg
+*.exe
+*.pck
+*.zip
+
+# Temporary files and logs
+*.tmp
+*.temp
+*.swp
+*.swo
+*.log
+.DS_Store
+Thumbs.db
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+credentials.json
+secrets.json
+
+# Editor metadata
+.vscode/
+.idea/
+
+# Local test/runtime output
+/tmp/
+/tmp-*/
+coverage/

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "description": "参考原版 PC 三国志曹操传的等级与战斗经验规则。",
+  "maxLevel": 50,
+  "expToNextLevel": 100,
+  "storage": "current_level_progress",
+  "combatExperience": {
+    "physicalAttack": {
+      "sameLevel": 8,
+      "targetLowerPerLevel": -1,
+      "targetHigherPerLevel": 2,
+      "min": 1,
+      "maxBeforeKillMultiplier": 100
+    },
+    "magicAttack": {
+      "sameLevel": 10,
+      "targetLowerPerTwoLevels": -1,
+      "targetHigherPerLevel": 4,
+      "min": 5,
+      "maxBeforeKillMultiplier": 100
+    },
+    "killMultiplier": 4,
+    "objectiveKillMultiplier": 2
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "description": "Godot 战役目录。运行时通过此清单发现 data/battles 下可选择的战场配置。",
+  "battles": [
+    {
+      "id": "yingchuan-01",
+      "file": "yingchuan-01.json",
+      "name": "颍川之战 · 河桥争夺",
+      "description": "12×10 横向河桥战场，双方各部署步兵、骑兵、弓箭手、法师和医生，在中央桥梁争夺主通路。",
+      "status": "prototype"
+    },
+    {
+      "id": "yingchuan-02",
+      "file": "yingchuan-02.json",
+      "name": "颍川之战 · 夜袭粮道",
+      "description": "第二章：夜间突袭黄巾军粮道，验证关卡解锁与队伍成长。",
+      "status": "available"
+    }
+  ]
+}

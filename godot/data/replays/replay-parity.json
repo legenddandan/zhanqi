@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "description": "阶段 1 Godot 回放 smoke fixture：覆盖移动、普通攻击、结束回合、胜负、固定 seed 和敌方多步地形寻路。",
+  "seed": 424242,
+  "summaryFields": [
+    "mode",
+    "phase",
+    "turn",
+    "units.instanceId",
+    "units.side",
+    "units.position",
+    "units.hp",
+    "units.maxHp",
+    "units.mp",
+    "units.maxMp",
+    "units.level",
+    "units.exp",
+    "units.alive",
+    "units.moved",
+    "units.acted"
+  ],
+  "scenarios": [
+    {
+      "id": "move-attack-victory",
+      "description": "移动到相邻格后普通攻击，击破最后一个敌人。",
+      "battle": {
+        "id": "replay-parity-victory",
+        "name": "Replay parity victory",
+        "board": {
+          "width": 3,
+          "height": 1,
+          "tiles": [["plain", "plain", "plain"]]
+        },
+        "units": [
+          {
+            "instanceId": "ally_infantry",
+            "characterId": "infantry-a",
+            "displayName": "魏步兵",
+            "side": "ally",
+            "position": {"x": 0, "y": 0},
+            "level": 1,
+            "exp": 0
+          },
+          {
+            "instanceId": "enemy_infantry",
+            "characterId": "infantry-a",
+            "displayName": "黄巾步兵",
+            "side": "enemy",
+            "position": {"x": 2, "y": 0},
+            "initialHp": 1,
+            "level": 1,
+            "exp": 0
+          }
+        ],
+        "objectives": {
+          "victory": [{"type": "defeat_all", "side": "enemy"}],
+          "defeat": [{"type": "all_units_dead", "side": "ally"}]
+        },
+        "rules": {
+          "turnOrder": "ally_then_enemy",
+          "allowFriendlyFire": false,
+          "fogOfWar": false,
+          "maxTurns": null,
+          "aiPolicy": "aggressive",
+          "carryOverHp": false
+        }
+      },
+      "commands": [
+        {"type": "move", "unitId": "ally_infantry", "x": 1, "y": 0},
+        {"type": "attack", "attackerId": "ally_infantry", "targetId": "enemy_infantry"}
+      ]
+    },
+    {
+      "id": "end-turn-transition",
+      "description": "结束我方回合，敌方在相邻格攻击后进入下一回合。",
+      "battle": {
+        "id": "replay-parity-end-turn",
+        "name": "Replay parity end turn",
+        "board": {
+          "width": 2,
+          "height": 1,
+          "tiles": [["plain", "plain"]]
+        },
+        "units": [
+          {
+            "instanceId": "ally_infantry",
+            "characterId": "infantry-a",
+            "displayName": "魏步兵",
+            "side": "ally",
+            "position": {"x": 0, "y": 0},
+            "level": 1,
+            "exp": 0
+          },
+          {
+            "instanceId": "enemy_infantry",
+            "characterId": "infantry-a",
+            "displayName": "黄巾步兵",
+            "side": "enemy",
+            "position": {"x": 1, "y": 0},
+            "level": 1,
+            "exp": 0
+          }
+        ],
+        "objectives": {
+          "victory": [{"type": "defeat_all", "side": "enemy"}],
+          "defeat": [{"type": "all_units_dead", "side": "ally"}]
+        },
+        "rules": {
+          "turnOrder": "ally_then_enemy",
+          "allowFriendlyFire": false,
+          "fogOfWar": false,
+          "maxTurns": null,
+          "aiPolicy": "aggressive",
+          "carryOverHp": false
+        }
+      },
+      "commands": [
+        {"type": "end_turn"}
+      ]
+    },
+    {
+      "id": "end-turn-defeat",
+      "description": "结束我方回合，初始 1 HP 的我方单位被相邻敌人击破。",
+      "battle": {
+        "id": "replay-parity-defeat",
+        "name": "Replay parity defeat",
+        "board": {
+          "width": 2,
+          "height": 1,
+          "tiles": [["plain", "plain"]]
+        },
+        "units": [
+          {
+            "instanceId": "ally_infantry",
+            "characterId": "infantry-a",
+            "displayName": "魏步兵",
+            "side": "ally",
+            "position": {"x": 0, "y": 0},
+            "initialHp": 1,
+            "level": 1,
+            "exp": 0
+          },
+          {
+            "instanceId": "enemy_infantry",
+            "characterId": "infantry-a",
+            "displayName": "黄巾步兵",
+            "side": "enemy",
+            "position": {"x": 1, "y": 0},
+            "level": 1,
+            "exp": 0
+          }
+        ],
+        "objectives": {
+          "victory": [{"type": "defeat_all", "side": "enemy"}],
+          "defeat": [{"type": "all_units_dead", "side": "ally"}]
+        },
+        "rules": {
+          "turnOrder": "ally_then_enemy",
+          "allowFriendlyFire": false,
+          "fogOfWar": false,
+          "maxTurns": null,
+          "aiPolicy": "aggressive",
+          "carryOverHp": false
+        }
+      },
+      "commands": [
+        {"type": "end_turn"}
+      ]
+    },
+    {
+      "id": "enemy-terrain-path",
+      "description": "敌方绕过山地，避开高成本林地，在移动力内选择最近可达格。",
+      "battle": {
+        "id": "replay-parity-enemy-terrain-path",
+        "name": "Replay parity enemy terrain path",
+        "board": {
+          "width": 5,
+          "height": 3,
+          "tiles": [
+            ["plain", "forest", "forest", "plain", "plain"],
+            ["plain", "plain", "mountain", "plain", "plain"],
+            ["plain", "plain", "plain", "plain", "plain"]
+          ]
+        },
+        "units": [
+          {
+            "instanceId": "path_enemy",
+            "characterId": "infantry-a",
+            "displayName": "黄巾步兵",
+            "side": "enemy",
+            "position": {"x": 0, "y": 1},
+            "level": 1,
+            "exp": 0
+          },
+          {
+            "instanceId": "path_target",
+            "characterId": "infantry-a",
+            "displayName": "魏步兵",
+            "side": "ally",
+            "position": {"x": 4, "y": 1},
+            "level": 1,
+            "exp": 0
+          }
+        ],
+        "objectives": {
+          "victory": [{"type": "defeat_all", "side": "enemy"}],
+          "defeat": [{"type": "all_units_dead", "side": "ally"}]
+        },
+        "rules": {
+          "turnOrder": "ally_then_enemy",
+          "allowFriendlyFire": false,
+          "fogOfWar": false,
+          "maxTurns": null,
+          "aiPolicy": "aggressive",
+          "carryOverHp": false
+        }
+      },
+      "commands": [
+        {"type": "end_turn"}
+      ]
+    }
+  ]
+}

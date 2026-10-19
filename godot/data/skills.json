@@ -1,0 +1,380 @@
+{
+  "version": 3,
+  "description": "技能注册表。被动数值加成支持 percent/flat 模式；防御、生命、命中、闪避、魔法攻击和治疗等加成使用 percent，移动力/射程使用 flat，MP恢复使用固定值。",
+  "skillTypes": {
+    "active": "主动技能：使用后消耗本单位行动",
+    "passive": "被动技能：满足触发条件时自动生效"
+  },
+  "skills": [
+    {
+      "id": "class_infantry_guard",
+      "name": "护卫",
+      "type": "active",
+      "targetType": "self",
+      "minRange": 0,
+      "maxRange": 0,
+      "mpCost": 0,
+      "actionCost": "full",
+      "effect": {
+        "type": "guard",
+        "radius": 1,
+        "turns": 1
+      },
+      "description": "进入护卫姿态，为周围一格内的友军承担伤害。",
+      "implementation": "ready",
+      "animation": "guard",
+      "animationDuration": 1250
+    },
+    {
+      "id": "class_infantry_hold",
+      "name": "坚守",
+      "type": "passive",
+      "trigger": "always",
+      "effect": {
+        "type": "stat_add",
+        "stat": "defense",
+        "value": 10,
+        "mode": "percent"
+      },
+      "description": "提高自身物理防御。",
+      "implementation": "ready",
+      "animation": "hold",
+      "animationDuration": 1050
+    },
+    {
+      "id": "class_cavalry_charge",
+      "name": "冲锋",
+      "type": "active",
+      "targetType": "enemy_single",
+      "minRange": 1,
+      "maxRange": 1,
+      "mpCost": 0,
+      "actionCost": "full",
+      "effect": {
+        "type": "damage",
+        "damageType": "physical",
+        "power": 1.25,
+        "movedPower": 1.5
+      },
+      "description": "对单个敌人发动突击，移动后使用时效果更强。",
+      "implementation": "ready",
+      "animation": "charge",
+      "animationDuration": 1250
+    },
+    {
+      "id": "class_cavalry_mobility",
+      "name": "机动",
+      "type": "passive",
+      "trigger": "always",
+      "effect": {
+        "type": "stat_add",
+        "stat": "move",
+        "value": 1,
+        "mode": "flat"
+      },
+      "description": "提高移动力。",
+      "implementation": "ready",
+      "animation": "mobility",
+      "animationDuration": 1050
+    },
+    {
+      "id": "class_archer_precision",
+      "name": "精准射击",
+      "type": "active",
+      "targetType": "enemy_single",
+      "minRange": 2,
+      "maxRange": 3,
+      "mpCost": 0,
+      "actionCost": "full",
+      "effect": {
+        "type": "damage",
+        "damageType": "physical",
+        "hitBonus": 10,
+        "power": 1.15
+      },
+      "description": "远距离攻击一个敌人，并提高本次命中率。",
+      "implementation": "ready",
+      "animation": "precision",
+      "animationDuration": 1250
+    },
+    {
+      "id": "class_archer_longshot",
+      "name": "远射",
+      "type": "passive",
+      "trigger": "always",
+      "effect": {
+        "type": "stat_add",
+        "stat": "maxRange",
+        "value": 1,
+        "mode": "flat"
+      },
+      "description": "提高最大攻击距离。",
+      "implementation": "ready",
+      "animation": "longshot",
+      "animationDuration": 1050
+    },
+    {
+      "id": "class_mage_flame",
+      "name": "火焰术",
+      "type": "active",
+      "targetType": "enemy_single",
+      "minRange": 1,
+      "maxRange": 2,
+      "mpCost": 12,
+      "actionCost": "full",
+      "effect": {
+        "type": "damage",
+        "damageType": "magic",
+        "power": 1.25
+      },
+      "description": "消耗MP，对单个敌人造成魔法伤害。",
+      "implementation": "ready",
+      "animation": "flame",
+      "animationDuration": 2400
+    },
+    {
+      "id": "class_mage_meditation",
+      "name": "冥想",
+      "type": "passive",
+      "trigger": "turn_start",
+      "effect": {
+        "type": "restore_mp",
+        "value": 5
+      },
+      "description": "我方回合开始时恢复少量MP。",
+      "implementation": "ready",
+      "animation": "meditation",
+      "animationDuration": 1050
+    },
+    {
+      "id": "class_healer_heal",
+      "name": "治疗",
+      "type": "active",
+      "targetType": "ally_single",
+      "minRange": 1,
+      "maxRange": 2,
+      "mpCost": 10,
+      "actionCost": "full",
+      "effect": {
+        "type": "heal",
+        "power": 0.75
+      },
+      "description": "消耗MP，恢复一个友军的HP。",
+      "implementation": "ready",
+      "animation": "heal",
+      "animationDuration": 1250
+    },
+    {
+      "id": "class_healer_medicine",
+      "name": "医术",
+      "type": "passive",
+      "trigger": "always",
+      "effect": {
+        "type": "heal_bonus",
+        "value": 10,
+        "mode": "percent"
+      },
+      "description": "提高治疗效果。",
+      "implementation": "ready",
+      "animation": "medicine",
+      "animationDuration": 1050
+    },
+    {
+      "id": "personal_infantry_tactics",
+      "name": "战术反击",
+      "type": "active",
+      "targetType": "enemy_single",
+      "minRange": 1,
+      "maxRange": 1,
+      "mpCost": 0,
+      "actionCost": "full",
+      "effect": {
+        "type": "damage",
+        "damageType": "physical",
+        "counter": true
+      },
+      "description": "攻击一个相邻敌人，并准备反击。",
+      "implementation": "planned",
+      "animation": "tactics",
+      "animationDuration": 1250
+    },
+    {
+      "id": "personal_infantry_veteran",
+      "name": "老兵",
+      "type": "passive",
+      "trigger": "always",
+      "effect": {
+        "type": "stat_add",
+        "stat": "maxHp",
+        "value": 8,
+        "mode": "percent"
+      },
+      "description": "增加最大HP。",
+      "implementation": "planned",
+      "animation": "veteran",
+      "animationDuration": 1050
+    },
+    {
+      "id": "personal_cavalry_breakthrough",
+      "name": "突破",
+      "type": "active",
+      "targetType": "enemy_single",
+      "minRange": 1,
+      "maxRange": 1,
+      "mpCost": 0,
+      "actionCost": "full",
+      "effect": {
+        "type": "damage",
+        "damageType": "physical",
+        "ignoreDefense": 0.2
+      },
+      "description": "攻击一个敌人并部分无视其物理防御。",
+      "implementation": "planned",
+      "animation": "breakthrough",
+      "animationDuration": 1250
+    },
+    {
+      "id": "personal_cavalry_rearguard",
+      "name": "回马",
+      "type": "passive",
+      "trigger": "after_move",
+      "effect": {
+        "type": "stat_add",
+        "stat": "evasion",
+        "value": 10,
+        "mode": "percent"
+      },
+      "description": "移动后短时间内提高闪避。",
+      "implementation": "planned",
+      "animation": "rearguard",
+      "animationDuration": 1050
+    },
+    {
+      "id": "personal_archer_aim",
+      "name": "蓄力",
+      "type": "active",
+      "targetType": "enemy_single",
+      "minRange": 2,
+      "maxRange": 3,
+      "mpCost": 0,
+      "actionCost": "full",
+      "effect": {
+        "type": "damage",
+        "damageType": "physical",
+        "power": 1.35
+      },
+      "description": "牺牲部分机动性，进行一次强力远射。",
+      "implementation": "planned",
+      "animation": "aim",
+      "animationDuration": 1250
+    },
+    {
+      "id": "personal_archer_eagle_eye",
+      "name": "鹰眼",
+      "type": "passive",
+      "trigger": "always",
+      "effect": {
+        "type": "stat_add",
+        "stat": "hit",
+        "value": 10,
+        "mode": "percent"
+      },
+      "description": "提高命中。",
+      "implementation": "planned",
+      "animation": "eagle_eye",
+      "animationDuration": 1050
+    },
+    {
+      "id": "personal_mage_chain_flame",
+      "name": "连焰",
+      "type": "active",
+      "targetType": "enemy_area",
+      "minRange": 1,
+      "maxRange": 2,
+      "mpCost": 20,
+      "actionCost": "full",
+      "effect": {
+        "type": "damage",
+        "damageType": "magic",
+        "power": 0.8,
+        "chain": 2,
+        "area": 1,
+        "statusId": "burn"
+      },
+      "description": "消耗较多MP，对目标及附近敌人造成魔法伤害。",
+      "implementation": "ready",
+      "animation": "chain_flame",
+      "animationDuration": 2600
+    },
+    {
+      "id": "personal_mage_focus",
+      "name": "专注",
+      "type": "passive",
+      "trigger": "always",
+      "effect": {
+        "type": "stat_add",
+        "stat": "magicAttack",
+        "value": 8,
+        "mode": "percent"
+      },
+      "description": "提高魔法攻击。",
+      "implementation": "planned",
+      "animation": "focus",
+      "animationDuration": 1050
+    },
+    {
+      "id": "personal_healer_group_heal",
+      "name": "群体治疗",
+      "type": "active",
+      "targetType": "ally_area",
+      "minRange": 1,
+      "maxRange": 2,
+      "mpCost": 24,
+      "actionCost": "full",
+      "effect": {
+        "type": "heal",
+        "power": 0.7,
+        "area": 1
+      },
+      "description": "消耗较多MP，治疗目标及其周围友军。",
+      "implementation": "ready",
+      "animation": "group_heal",
+      "animationDuration": 1250
+    },
+    {
+      "id": "personal_healer_cleanse",
+      "name": "净化",
+      "type": "passive",
+      "trigger": "turn_start",
+      "effect": {
+        "type": "remove_status",
+        "target": "self"
+      },
+      "description": "回合开始时尝试移除自身负面状态。",
+      "implementation": "planned",
+      "animation": "cleanse",
+      "animationDuration": 1050
+    },
+    {
+      "id": "class_mage_burst",
+      "name": "烈焰散华",
+      "type": "active",
+      "targetType": "enemy_area",
+      "minRange": 1,
+      "maxRange": 2,
+      "mpCost": 20,
+      "actionCost": "full",
+      "effect": {
+        "type": "damage",
+        "damageType": "magic",
+        "power": 0.8,
+        "area": 1,
+        "statusId": "poison"
+      },
+      "description": "对目标及周围一格敌人造成魔法伤害，并有机会施加中毒。",
+      "implementation": "ready",
+      "animation": "burst",
+      "animationDuration": 1800
+    }
+  ]
+}

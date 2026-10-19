@@ -1,0 +1,910 @@
+{
+  "version": 2,
+  "description": "兵种模板：定义公共1级基础属性、逐属性成长、战斗职责和规则标签。人物模板可在此基础上配置个人修正。",
+  "damageTypes": {
+    "physical": "使用物理攻击与物理防御计算",
+    "magic": "使用魔法攻击与魔法防御计算"
+  },
+  "classes": [
+    {
+      "id": "infantry",
+      "name": "步兵",
+      "role": "frontline",
+      "basicAttackType": "physical",
+      "attackStyle": "melee",
+      "movementType": "foot",
+      "resourceFocus": "none",
+      "baseStats": {
+        "maxHp": 120,
+        "maxMp": 20,
+        "attack": 60,
+        "defense": 45,
+        "magicAttack": 15,
+        "magicDefense": 30,
+        "hit": 10,
+        "evasion": 5,
+        "move": 4,
+        "minRange": 1,
+        "maxRange": 1
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 12,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "正面作战稳定",
+        "攻防均衡",
+        "适合作为队伍前排"
+      ],
+      "futureSkills": [
+        "护卫",
+        "坚守",
+        "反击"
+      ],
+      "skillIds": [
+        "class_infantry_guard",
+        "class_infantry_hold"
+      ],
+      "sprite": "assets/unit-infantry-historical.png",
+      "statusResistances": {
+        "slow": 0.25
+      }
+    },
+    {
+      "id": "cavalry",
+      "name": "骑兵",
+      "role": "mobile",
+      "basicAttackType": "physical",
+      "attackStyle": "melee",
+      "movementType": "cavalry",
+      "resourceFocus": "none",
+      "baseStats": {
+        "maxHp": 110,
+        "maxMp": 15,
+        "attack": 60,
+        "defense": 34,
+        "magicAttack": 12,
+        "magicDefense": 25,
+        "hit": 12,
+        "evasion": 10,
+        "move": 5,
+        "minRange": 1,
+        "maxRange": 1
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 10,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "机动性强",
+        "适合侧翼和追击",
+        "可以设计冲锋类技能"
+      ],
+      "futureSkills": [
+        "冲锋",
+        "突击",
+        "撤退"
+      ],
+      "skillIds": [
+        "class_cavalry_charge",
+        "class_cavalry_mobility"
+      ],
+      "sprite": "assets/unit-cavalry-historical.png",
+      "statusResistances": {
+        "poison": 0.1
+      }
+    },
+    {
+      "id": "archer",
+      "name": "弓箭手",
+      "role": "rangedDamage",
+      "basicAttackType": "physical",
+      "attackStyle": "ranged",
+      "movementType": "foot",
+      "resourceFocus": "none",
+      "baseStats": {
+        "maxHp": 85,
+        "maxMp": 25,
+        "attack": 48,
+        "defense": 24,
+        "magicAttack": 20,
+        "magicDefense": 28,
+        "hit": 15,
+        "evasion": 8,
+        "move": 4,
+        "minRange": 2,
+        "maxRange": 3
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 8,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "远距离物理输出",
+        "适合优先攻击脆弱目标",
+        "近身作战能力较弱"
+      ],
+      "futureSkills": [
+        "连射",
+        "穿透箭",
+        "压制射击"
+      ],
+      "skillIds": [
+        "class_archer_precision",
+        "class_archer_longshot"
+      ],
+      "sprite": "assets/unit-archer-historical.png",
+      "statusResistances": {
+        "slow": 0.1
+      }
+    },
+    {
+      "id": "mage",
+      "name": "法师",
+      "role": "magicDamage",
+      "basicAttackType": "magic",
+      "attackStyle": "ranged",
+      "movementType": "foot",
+      "resourceFocus": "mp",
+      "baseStats": {
+        "maxHp": 70,
+        "maxMp": 80,
+        "attack": 15,
+        "defense": 18,
+        "magicAttack": 50,
+        "magicDefense": 38,
+        "hit": 10,
+        "evasion": 5,
+        "move": 4,
+        "minRange": 1,
+        "maxRange": 2
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 6,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 8,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "普通攻击使用魔法攻击力",
+        "技能和法术依赖 MP",
+        "适合范围伤害和控制"
+      ],
+      "futureSkills": [
+        "火焰术",
+        "冰冻术",
+        "范围法术"
+      ],
+      "skillIds": [
+        "class_mage_flame",
+        "class_mage_meditation",
+        "class_mage_burst"
+      ],
+      "sprite": "assets/unit-mage-historical.png",
+      "statusResistances": {
+        "burn": 0.2
+      }
+    },
+    {
+      "id": "healer",
+      "name": "医生",
+      "role": "support",
+      "basicAttackType": "magic",
+      "attackStyle": "ranged",
+      "movementType": "foot",
+      "resourceFocus": "mp",
+      "baseStats": {
+        "maxHp": 75,
+        "maxMp": 90,
+        "attack": 12,
+        "defense": 20,
+        "magicAttack": 28,
+        "magicDefense": 40,
+        "hit": 10,
+        "evasion": 5,
+        "move": 4,
+        "minRange": 1,
+        "maxRange": 2
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 7,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 9,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "普通攻击使用魔法攻击力",
+        "核心职责是治疗和辅助",
+        "技能和法术消耗 MP"
+      ],
+      "futureSkills": [
+        "治疗",
+        "恢复",
+        "鼓舞",
+        "净化"
+      ],
+      "skillIds": [
+        "class_healer_heal",
+        "class_healer_medicine"
+      ],
+      "sprite": "assets/unit-healer-historical.png",
+      "statusResistances": {
+        "poison": 0.2
+      }
+    },
+    {
+      "id": "guard",
+      "name": "重装卫士",
+      "role": "frontline",
+      "basicAttackType": "physical",
+      "attackStyle": "melee",
+      "movementType": "foot",
+      "resourceFocus": "none",
+      "baseStats": {
+        "maxHp": 138,
+        "maxMp": 20,
+        "attack": 60,
+        "defense": 55,
+        "magicAttack": 15,
+        "magicDefense": 30,
+        "hit": 10,
+        "evasion": 5,
+        "move": 3,
+        "minRange": 1,
+        "maxRange": 1
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 12,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "正面作战稳定",
+        "攻防均衡",
+        "适合作为队伍前排"
+      ],
+      "futureSkills": [
+        "护卫",
+        "坚守",
+        "反击"
+      ],
+      "skillIds": [
+        "class_infantry_guard",
+        "class_infantry_hold"
+      ],
+      "sprite": "assets/unit-infantry-historical.png",
+      "advancedFrom": "infantry",
+      "baseClass": "infantry"
+    },
+    {
+      "id": "heavy_infantry",
+      "name": "重甲步兵",
+      "role": "frontline",
+      "basicAttackType": "physical",
+      "attackStyle": "melee",
+      "movementType": "foot",
+      "resourceFocus": "none",
+      "baseStats": {
+        "maxHp": 150,
+        "maxMp": 20,
+        "attack": 66,
+        "defense": 61,
+        "magicAttack": 15,
+        "magicDefense": 30,
+        "hit": 10,
+        "evasion": 5,
+        "move": 3,
+        "minRange": 1,
+        "maxRange": 1
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 12,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "正面作战稳定",
+        "攻防均衡",
+        "适合作为队伍前排"
+      ],
+      "futureSkills": [
+        "护卫",
+        "坚守",
+        "反击"
+      ],
+      "skillIds": [
+        "class_infantry_guard",
+        "class_infantry_hold"
+      ],
+      "sprite": "assets/unit-infantry-historical.png",
+      "advancedFrom": "infantry",
+      "baseClass": "infantry"
+    },
+    {
+      "id": "heavy_cavalry",
+      "name": "重骑兵",
+      "role": "mobile",
+      "basicAttackType": "physical",
+      "attackStyle": "melee",
+      "movementType": "cavalry",
+      "resourceFocus": "none",
+      "baseStats": {
+        "maxHp": 130,
+        "maxMp": 15,
+        "attack": 68,
+        "defense": 42,
+        "magicAttack": 12,
+        "magicDefense": 25,
+        "hit": 12,
+        "evasion": 10,
+        "move": 6,
+        "minRange": 1,
+        "maxRange": 1
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 10,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "机动性强",
+        "适合侧翼和追击",
+        "可以设计冲锋类技能"
+      ],
+      "futureSkills": [
+        "冲锋",
+        "突击",
+        "撤退"
+      ],
+      "skillIds": [
+        "class_cavalry_charge",
+        "class_cavalry_mobility"
+      ],
+      "sprite": "assets/unit-cavalry-historical.png",
+      "advancedFrom": "cavalry",
+      "baseClass": "cavalry"
+    },
+    {
+      "id": "mounted_archer",
+      "name": "弩骑射手",
+      "role": "rangedDamage",
+      "basicAttackType": "physical",
+      "attackStyle": "ranged",
+      "movementType": "foot",
+      "resourceFocus": "none",
+      "baseStats": {
+        "maxHp": 97,
+        "maxMp": 25,
+        "attack": 55,
+        "defense": 29,
+        "magicAttack": 20,
+        "magicDefense": 28,
+        "hit": 15,
+        "evasion": 8,
+        "move": 5,
+        "minRange": 2,
+        "maxRange": 3
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 8,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "远距离物理输出",
+        "适合优先攻击脆弱目标",
+        "近身作战能力较弱"
+      ],
+      "futureSkills": [
+        "连射",
+        "穿透箭",
+        "压制射击"
+      ],
+      "skillIds": [
+        "class_archer_precision",
+        "class_archer_longshot"
+      ],
+      "sprite": "assets/unit-archer-historical.png",
+      "advancedFrom": "archer",
+      "baseClass": "archer"
+    },
+    {
+      "id": "elder_mage",
+      "name": "大贤良师",
+      "role": "magicDamage",
+      "basicAttackType": "magic",
+      "attackStyle": "ranged",
+      "movementType": "foot",
+      "resourceFocus": "mp",
+      "baseStats": {
+        "maxHp": 84,
+        "maxMp": 98,
+        "attack": 15,
+        "defense": 18,
+        "magicAttack": 62,
+        "magicDefense": 38,
+        "hit": 10,
+        "evasion": 5,
+        "move": 4,
+        "minRange": 1,
+        "maxRange": 2
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 6,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 8,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "普通攻击使用魔法攻击力",
+        "技能和法术依赖 MP",
+        "适合范围伤害和控制"
+      ],
+      "futureSkills": [
+        "火焰术",
+        "冰冻术",
+        "范围法术"
+      ],
+      "skillIds": [
+        "class_mage_flame",
+        "class_mage_meditation",
+        "class_mage_burst"
+      ],
+      "sprite": "assets/unit-mage-historical.png",
+      "advancedFrom": "mage",
+      "baseClass": "mage"
+    },
+    {
+      "id": "field_medic",
+      "name": "军医",
+      "role": "support",
+      "basicAttackType": "magic",
+      "attackStyle": "ranged",
+      "movementType": "foot",
+      "resourceFocus": "mp",
+      "baseStats": {
+        "maxHp": 91,
+        "maxMp": 102,
+        "attack": 12,
+        "defense": 20,
+        "magicAttack": 36,
+        "magicDefense": 40,
+        "hit": 10,
+        "evasion": 5,
+        "move": 4,
+        "minRange": 1,
+        "maxRange": 2
+      },
+      "growth": {
+        "maxHp": {
+          "amount": 7,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "maxMp": {
+          "amount": 9,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "attack": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "defense": {
+          "amount": 2,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicAttack": {
+          "amount": 3,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "magicDefense": {
+          "amount": 4,
+          "everyLevels": 1,
+          "firstAtLevel": 2
+        },
+        "hit": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        },
+        "evasion": {
+          "amount": 1,
+          "everyLevels": 2,
+          "firstAtLevel": 2
+        }
+      },
+      "characteristics": [
+        "普通攻击使用魔法攻击力",
+        "核心职责是治疗和辅助",
+        "技能和法术消耗 MP"
+      ],
+      "futureSkills": [
+        "治疗",
+        "恢复",
+        "鼓舞",
+        "净化"
+      ],
+      "skillIds": [
+        "class_healer_heal",
+        "class_healer_medicine"
+      ],
+      "sprite": "assets/unit-healer-historical.png",
+      "advancedFrom": "healer",
+      "baseClass": "healer"
+    }
+  ]
+}
