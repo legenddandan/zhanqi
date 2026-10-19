@@ -3,24 +3,31 @@ extends RefCounted
 ## 版本化、可恢复的单机存档仓库。存档只保存 campaign state，不保存临时渲染状态。
 
 const SAVE_VERSION := 1
-const SAVE_DIR := "user://saves"
+const DEFAULT_SAVE_DIR := "user://saves"
+
+var save_dir := DEFAULT_SAVE_DIR
+
+func _init(storage_dir: String = DEFAULT_SAVE_DIR) -> void:
+	save_dir = storage_dir.trim_suffix("/")
+	if save_dir.is_empty():
+		save_dir = DEFAULT_SAVE_DIR
 
 func save_battle(slot: String, battle_id: String, battle_definition: Dictionary, battle_state: Dictionary, rng_seed: int) -> Dictionary:
 	if not _valid_slot(slot) or battle_id.is_empty():
 		return {"ok": false, "error": "invalid battle save arguments"}
 	var payload := {"schemaVersion": SAVE_VERSION, "battleId": battle_id, "battle": battle_definition.duplicate(true), "state": battle_state.duplicate(true), "rngSeed": rng_seed}
-	return _write_atomic("%s/%s.battle.json" % [SAVE_DIR, slot], payload)
+	return _write_atomic("%s/%s.battle.json" % [save_dir, slot], payload)
 
 func restore_battle_snapshot(slot: String, battle_id: String, battle_definition: Dictionary, battle_state: Dictionary, rng_seed: int) -> Dictionary:
 	if not _valid_slot(slot) or battle_id.is_empty():
 		return {"ok": false, "error": "invalid battle restore arguments"}
 	var payload := {"schemaVersion": SAVE_VERSION, "battleId": battle_id, "battle": battle_definition.duplicate(true), "state": battle_state.duplicate(true), "rngSeed": rng_seed}
-	return _write_atomic("%s/%s.battle.json" % [SAVE_DIR, slot], payload, false)
+	return _write_atomic("%s/%s.battle.json" % [save_dir, slot], payload, false)
 
 func load_battle(slot: String) -> Dictionary:
 	if not _valid_slot(slot):
 		return {"ok": false, "error": "invalid save slot"}
-	var path := "%s/%s.battle.json" % [SAVE_DIR, slot]
+	var path := "%s/%s.battle.json" % [save_dir, slot]
 	if not FileAccess.file_exists(path):
 		return {"ok": true, "exists": false}
 	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
@@ -43,7 +50,7 @@ func _recover_battle_backup(path: String, original_error: String) -> Dictionary:
 func clear_battle(slot: String) -> Dictionary:
 	if not _valid_slot(slot):
 		return {"ok": false, "error": "invalid save slot"}
-	var path := "%s/%s.battle.json" % [SAVE_DIR, slot]
+	var path := "%s/%s.battle.json" % [save_dir, slot]
 	if FileAccess.file_exists(path):
 		var error := DirAccess.remove_absolute(path)
 		if error != OK:
@@ -54,18 +61,18 @@ func save_campaign(slot: String, campaign: Dictionary) -> Dictionary:
 	if not _valid_slot(slot):
 		return {"ok": false, "error": "invalid save slot"}
 	var payload := {"schemaVersion": SAVE_VERSION, "campaign": campaign.duplicate(true)}
-	return _write_atomic("%s/%s.json" % [SAVE_DIR, slot], payload)
+	return _write_atomic("%s/%s.json" % [save_dir, slot], payload)
 
 func restore_campaign_snapshot(slot: String, campaign: Dictionary) -> Dictionary:
 	if not _valid_slot(slot):
 		return {"ok": false, "error": "invalid save slot"}
 	var payload := {"schemaVersion": SAVE_VERSION, "campaign": campaign.duplicate(true)}
-	return _write_atomic("%s/%s.json" % [SAVE_DIR, slot], payload, false)
+	return _write_atomic("%s/%s.json" % [save_dir, slot], payload, false)
 
 func clear_campaign(slot: String) -> Dictionary:
 	if not _valid_slot(slot):
 		return {"ok": false, "error": "invalid save slot"}
-	var path := "%s/%s.json" % [SAVE_DIR, slot]
+	var path := "%s/%s.json" % [save_dir, slot]
 	if FileAccess.file_exists(path):
 		var error := DirAccess.remove_absolute(path)
 		if error != OK:
@@ -75,7 +82,7 @@ func clear_campaign(slot: String) -> Dictionary:
 func load_campaign(slot: String) -> Dictionary:
 	if not _valid_slot(slot):
 		return {"ok": false, "error": "invalid save slot"}
-	var path := "%s/%s.json" % [SAVE_DIR, slot]
+	var path := "%s/%s.json" % [save_dir, slot]
 	if not FileAccess.file_exists(path):
 		return {"ok": true, "exists": false, "campaign": _default_campaign()}
 	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path))
@@ -100,10 +107,9 @@ func _valid_slot(slot: String) -> bool:
 	return not slot.is_empty() and not slot.contains("/") and not slot.contains("\\")
 
 func _write_atomic(target: String, payload: Dictionary, keep_backup: bool = true) -> Dictionary:
-	var directory := DirAccess.open("user://")
-	if directory == null:
-		return {"ok": false, "error": "cannot open user data directory"}
-	directory.make_dir_recursive("saves")
+	var directory_error := _ensure_save_directory()
+	if directory_error != OK:
+		return {"ok": false, "error": "cannot create save directory: %s" % directory_error}
 	var temporary := "%s.tmp" % target
 	var file := FileAccess.open(temporary, FileAccess.WRITE)
 	if file == null:
@@ -120,6 +126,21 @@ func _write_atomic(target: String, payload: Dictionary, keep_backup: bool = true
 	if rename_error != OK:
 		return {"ok": false, "error": "cannot commit save: %s" % rename_error}
 	return {"ok": true, "path": target}
+
+func _ensure_save_directory() -> Error:
+	if save_dir.begins_with("user://"):
+		var user_directory := DirAccess.open("user://")
+		if user_directory == null:
+			return ERR_CANT_OPEN
+		var relative_path := save_dir.trim_prefix("user://").trim_suffix("/")
+		return OK if relative_path.is_empty() else user_directory.make_dir_recursive(relative_path)
+	if save_dir.begins_with("res://"):
+		var project_directory := DirAccess.open("res://")
+		if project_directory == null:
+			return ERR_CANT_OPEN
+		var relative_path := save_dir.trim_prefix("res://").trim_suffix("/")
+		return OK if relative_path.is_empty() else project_directory.make_dir_recursive(relative_path)
+	return DirAccess.make_dir_recursive_absolute(save_dir)
 
 func _default_campaign() -> Dictionary:
 	return {"schemaVersion": 1, "completedBattles": [], "roster": {}, "gold": 0}

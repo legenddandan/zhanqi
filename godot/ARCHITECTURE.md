@@ -40,7 +40,7 @@ DataRepository / SaveRepository 基础设施：JSON 校验、版本化存档、�
 - `data/equipment.json` / `data/statuses.json` / `data/class_advancements.json`：装备、持续状态和兵种进阶注册表；技能、关卡奖励通过稳定 ID 引用。
 - `data/items.json`：消耗品注册表；营地商店与战斗道具效果都通过稳定 ID 引用。
 - `data/terrains.json`：地形同时定义移动成本、防御/命中修正和回合恢复效果，规则层与表现层共用同一注册表。
-- `scripts/save/SaveRepository.gd`：版本化 `user://saves` 存档，临时文件写完后再提交，提供 `.bak` 损坏回退。
+- `scripts/save/SaveRepository.gd`：默认使用版本化 `user://saves` 存档，存储目录可注入；临时文件写完后再提交，提供 `.bak` 损坏回退。`GameSession` 的第二个构造参数用于 smoke 注入隔离临时目录。
 - `scripts/presentation/BattleScene.gd`：Control 场景组合根，只负责生命周期、输入映射和命令派发。
 - `scripts/presentation/BoardView.gd`：Control 视图，只绘制地形、单位和选择覆盖层。
 - `scripts/presentation/BattleHud.gd`：Control HUD，只绘制状态面板和按钮区域。

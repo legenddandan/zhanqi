@@ -1,10 +1,12 @@
 extends SceneTree
 
 const GameSession = preload("res://scripts/app/GameSession.gd")
+const SmokeStorage = preload("res://tests/smoke_storage.gd")
 
 func _init() -> void:
 	var failures: Array[String] = []
-	var session = GameSession.new("res://data")
+	var storage_dir := SmokeStorage.create("architecture")
+	var session = GameSession.new("res://data", storage_dir)
 	var initialized: Dictionary = session.initialize()
 	if not initialized.ok:
 		failures.append("repository validation failed: %s" % initialized.errors)
@@ -46,5 +48,6 @@ func _init() -> void:
 	else:
 		for failure in failures:
 			push_error("[Architecture smoke] " + failure)
+	SmokeStorage.cleanup(storage_dir)
 	quit(1 if not failures.is_empty() else 0)
 

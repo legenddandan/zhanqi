@@ -19,8 +19,11 @@ var bundle: Dictionary = {}
 var active_battle_id := ""
 var active_battle: Dictionary = {}
 
-func _init(root: String = "res://data") -> void:
+func _init(root: String = "res://data", storage_dir: String = "user://saves") -> void:
 	data_root = root
+	save_repository = SaveRepository.new(storage_dir)
+	save_coordinator = SaveCoordinator.new(save_repository)
+	campaign_service = CampaignService.new(save_repository, data_root)
 
 func initialize() -> Dictionary:
 	var result: Dictionary = data_repository.load_bundle(data_root)

@@ -22,6 +22,7 @@ Godot 通过 `DataRepository` 从本目录的 `data/` 加载唯一 canonical 数
 - 敌方回合的确定性追击 AI：在合法射程且 MP 足够时优先使用已实现的攻击/支援主动技能，否则移动并普通攻击；技能事件会写入战斗记录和回放 trace。
 - 战役进度、队伍编成、关卡解锁、金币奖励、战斗经验/升级和自动存档。
 - 战斗中途会保存到 `user://saves/campaign-1.battle.json`，重新启动后可继续；存档写入带临时文件和 `.bak` 回退。
+- `GameSession` 默认使用正式存储目录 `user://saves`；无头 smoke 通过第二个构造参数注入 `/tmp` 临时目录，避免测试依赖宿主 Godot 用户目录权限或残留状态。
 - P3 内容：装备属性与换装、兵种进阶、范围技能、中毒/灼烧等持续状态、带条件分支的剧情对话与战斗记录。
 - 低优先级内容：装备品质/数量/价格与购买、Control 场景 UI、可选音频事件门面、导出前静态检查。
 
@@ -50,6 +51,8 @@ godot --headless --path . --script tests/export_readiness.gd
 ```sh
 godot --headless --path . --script tests/replay_parity_smoke.gd
 ```
+
+如果运行环境禁止 Godot 默认的 `user://logs` 写入，可额外传入 `--log-file /tmp/zhanqi-godot.log`；这只重定向引擎日志，不改变正式存档仍使用的 `user://saves`。
 
 ## 当前限制
 
