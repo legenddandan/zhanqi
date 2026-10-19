@@ -15,6 +15,8 @@ var formation_selection := ""
 var equipment_selection := ""
 var shop_open := false
 var cached_font: Font
+## Scene smoke can keep the campaign node mounted while exercising its entry path.
+var navigate_to_battle := true
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -173,7 +175,7 @@ func _on_pointer_pressed(position: Vector2) -> void:
 		if not button_rects[key].has_point(position):
 			continue
 		if String(key).begins_with("start_battle:"):
-			_start_battle(String(key).substr(13))
+			_start_battle(String(key).substr(13), navigate_to_battle)
 		elif key == "new_campaign":
 			_new_campaign()
 		elif key == "camp_rest":
@@ -199,14 +201,15 @@ func _on_pointer_pressed(position: Vector2) -> void:
 			_advance(parts[1], parts[2])
 		return
 
-func _start_battle(battle_id: String = "yingchuan-01") -> void:
+func _start_battle(battle_id: String = "yingchuan-01", navigate_to_battle: bool = true) -> void:
 	var started: Dictionary = session.start_battle(battle_id, 20261017)
 	if not started.ok:
 		AudioManager.play_event("ui_error")
 		message = "无法进入战场：%s" % started.get("error", "未知错误")
 		return
 	AudioManager.play_event("ui_confirm")
-	get_tree().change_scene_to_file("res://Main.tscn")
+	if navigate_to_battle:
+		get_tree().change_scene_to_file("res://Main.tscn")
 
 func _new_campaign() -> void:
 	var result: Dictionary = session.new_campaign()
@@ -265,7 +268,7 @@ func _advance(instance_id: String, advancement_id: String) -> void:
 
 func _on_key_pressed(keycode: Key) -> void:
 	if keycode == KEY_ENTER:
-		_start_battle(_first_unlocked_battle())
+		_start_battle(_first_unlocked_battle(), navigate_to_battle)
 	elif keycode == KEY_R:
 		_new_campaign()
 

@@ -54,6 +54,14 @@ godot --headless --path . --script tests/replay_parity_smoke.gd
 
 如果运行环境禁止 Godot 默认的 `user://logs` 写入，可额外传入 `--log-file /tmp/zhanqi-godot.log`；这只重定向引擎日志，不改变正式存档仍使用的 `user://saves`。
 
+## 场景级第一关闭环 smoke
+
+`tests/scene_smoke.tscn` 会加载真实的 `Campaign.tscn` 和 `Main.tscn`，通过场景输入信号覆盖进入 `yingchuan-01`、开场对话、移动、结束回合、敌方行动、主动技能、胜负和重置。测试将存档注入 `/tmp` 临时目录，不会读取或污染正式 `user://` 存档。
+
+```sh
+godot --headless --path . --scene res://tests/scene_smoke.tscn --user-data-dir /tmp/zhanqi-scene-user
+```
+
 ## 当前限制
 
 - 阶段 1 只以 `yingchuan-01` 的核心战斗闭环作为验收目标；第二关和完整战役扩展已接入目录，但不代替核心规则稳定性。
